@@ -1,0 +1,3 @@
+{% for req in cookiecutter.requirements_test.split()|sort -%}
+{{ req }}
+{% endfor %}

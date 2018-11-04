@@ -1,0 +1,66 @@
+version: "{{ cookiecutter.docker_compose_version }}"
+
+x-base-service:
+  &base-service
+    build:
+      context: .
+      dockerfile: docker/base/Dockerfile
+      args:
+        PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
+        DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+    environment:
+      DB_NAME: app
+      DB_USER: app
+      DB_PASSWORD: app
+      DB_HOST: pg
+      DJANGO_ALLOWED_HOSTS:
+      DJANGO_SECRET_KEY:
+      DJANGO_DEBUG:
+      CELERY_BROKER_URL: redis://redis:6379/0
+    entrypoint: ["pysu", "app", "holdup", "--verbose", "tcp://pg:5432", "--"]
+    stop_signal: SIGINT
+
+services:
+  pg:
+    image: postgres:{{ cookiecutter.postgresql_version }}
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: app
+
+  redis:
+    image: redis:{{ cookiecutter.redis_version }}
+
+  # Note: this only exists so we can inherit the image it builds
+  base:
+    <<: *base-service
+    command: ["true"]
+    entrypoint: []
+
+  web:
+    <<: *base-service
+    build:
+      context: .
+      dockerfile: docker/web/Dockerfile
+      args:
+        PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
+        DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+    depends_on:
+    - pg
+    ports:
+    - "80:8000"
+    # this should really be specified in the Dockerfile but it's buggy: https://github.com/docker/compose/issues/3140
+    command: ["/start.sh"]
+
+  celery:
+    <<: *base-service
+    build:
+      context: .
+      dockerfile: docker/celery/Dockerfile
+      args:
+        PROJECT_NAME: ${COMPOSE_PROJECT_NAME}
+        DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+    command: ["celery", "-A", "{{ cookiecutter.django_project_name }}", "worker"]
+    depends_on:
+    - pg
+    - redis

@@ -1,0 +1,20 @@
+version: "{{ cookiecutter.docker_compose_version }}"
+
+services:
+
+  test:
+    build:
+      context: .
+      dockerfile: docker/test/Dockerfile
+    environment:
+      DB_NAME: app
+      DB_USER: app
+      DB_PASSWORD: app
+      DB_HOST: pg
+    stop_signal: SIGINT
+    depends_on:
+    - pg
+    - redis
+    volumes:
+    - $PWD:/app
+    - $PWD/.home:/home/app

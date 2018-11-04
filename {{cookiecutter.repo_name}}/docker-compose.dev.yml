@@ -1,0 +1,32 @@
+version: "{{ cookiecutter.docker_compose_version }}"
+
+x-develop:
+  &develop
+    volumes:
+    - "${PWD}:/app"
+    privileged: true
+    tty: true
+
+services:
+  web:
+    <<: *develop
+    command: ["/start.sh", "--processes", "2"]
+    environment:
+      COLLECTSTATIC: "yes"
+      DJANGO_DEBUG_TOOLBAR:
+    ports:
+    - "8000:80"
+  reloader:
+    <<: *develop
+    build:
+      context: docker/reloader
+    volumes:
+    - "${PWD}:/app"
+    - "/var/run/docker.sock:/var/run/docker.sock"
+    environment:
+      RELOADER_MONITOR:
+  pg:
+    command: ["postgres", "-c", "log_min_duration_statement=1s", "-c", "log_statement=all"]
+  celery:
+    <<: *develop
+    command: ["celery", "-A", "{{ cookiecutter.django_project_name }}", "worker", "-l", "debug"]
