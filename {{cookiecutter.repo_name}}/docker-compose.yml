@@ -47,6 +47,7 @@ services:
         DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
     depends_on:
     - pg
+    - redis
     ports:
     - "80:8000"
     # this should really be specified in the Dockerfile but it's buggy: https://github.com/docker/compose/issues/3140

@@ -134,3 +134,4 @@ MEDIA_ROOT = '/var/app/media/'
 
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+CELERY_BROKER_TRANSPORT_OPTIONS = {'max_retries': 1}
