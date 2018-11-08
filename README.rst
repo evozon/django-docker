@@ -3,12 +3,14 @@ evozon/docker-django
 ====================
 
 A Cookiecutter_ template for a Django_ project using Docker_. A description of the rationale behind this template is in
-`this blog post <https://www.evozon.com/blog>`_.
+`this blog post <https://www.evozon.com/blog/a-project-template-for-getting-started-with-django-and-docker>`_.
 
 What is included?
 
-* Packages for Django_ project and app, and Celery_ configuration.
+* Packages for Django_ project and an app
+* Setup for Celery_, uWSGI_, debug-toolbar etc
 * Setup for testing using Pytest_.
+* Reloader (container that restarts other containers when files change, for development).
 
 Generating the project
 ----------------------
@@ -98,3 +100,4 @@ Working with the project is the usual ``docker-compose up`` and such, nothing sp
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _Docker: https://www.docker.com/
 .. _Django: https://www.djangoproject.com/
+.. _Celery: http://www.celeryproject.org/
