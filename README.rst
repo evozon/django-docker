@@ -101,3 +101,4 @@ Working with the project is the usual ``docker-compose up`` and such, nothing sp
 .. _Docker: https://www.docker.com/
 .. _Django: https://www.djangoproject.com/
 .. _Celery: http://www.celeryproject.org/
+.. _uWSGI: https://uwsgi-docs.readthedocs.io/
