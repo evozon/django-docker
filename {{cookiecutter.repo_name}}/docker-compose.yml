@@ -37,6 +37,7 @@ services:
     <<: *base-service
     command: ["true"]
     entrypoint: []
+    restart: "no"
 
   web:
     <<: *base-service
