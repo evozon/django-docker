@@ -19,6 +19,7 @@ x-base-service:
       CELERY_BROKER_URL: redis://redis:6379/0
     entrypoint: ["pysu", "app", "holdup", "--verbose", "tcp://pg:5432", "--"]
     stop_signal: SIGINT
+    restart: unless-stopped
 
 services:
   pg:
