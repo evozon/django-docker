@@ -57,7 +57,6 @@ RUN bash -o pipefail -c "curl -fsSL 'https://bootstrap.pypa.io/get-pip.py' | pyt
 RUN mkdir /deps
 COPY --from=deps /wheels/* /deps/
 RUN pip install --force-reinstall --ignore-installed --upgrade --no-index --no-deps /deps/* \
- && rm -rf /deps \
  && mkdir /app /var/app
 
 # Create django user, will own the Django app

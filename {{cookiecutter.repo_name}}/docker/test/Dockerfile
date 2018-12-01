@@ -16,7 +16,6 @@ RUN mkdir /wheels \
 FROM {{ cookiecutter.compose_project_name }}test_base
 ########################################################################################################################
 
-RUN mkdir /deps
 COPY --from=deps /wheels/* /deps/
 RUN pip install --force-reinstall --ignore-installed --upgrade --no-index --no-deps /deps/* \
  && rm -rf /deps
