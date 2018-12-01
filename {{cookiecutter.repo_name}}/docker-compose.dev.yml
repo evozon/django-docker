@@ -6,12 +6,17 @@ x-develop:
     - "${PWD}:/app"
     privileged: true
     tty: true
+    environment:
+      &environ
+        PYTHONHUNTER:
+        PYTHONHUNTERCONFIG:
 
 services:
   web:
     <<: *develop
     command: ["/start.sh", "--processes", "2"]
     environment:
+      <<: *environ
       COLLECTSTATIC: "yes"
       DJANGO_DEBUG_TOOLBAR:
     ports:

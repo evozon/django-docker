@@ -11,6 +11,8 @@ services:
       DB_USER: app
       DB_PASSWORD: app
       DB_HOST: pg
+      PYTHONHUNTER:
+      PYTHONHUNTERCONFIG:
     stop_signal: SIGINT
     depends_on:
     - pg
