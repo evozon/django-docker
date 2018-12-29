@@ -1,5 +1,5 @@
 ====================
-evozon/docker-django
+evozon/django-docker
 ====================
 
 A Cookiecutter_ template for a Django_ project using Docker_. A description of the rationale behind this template is in
@@ -17,7 +17,7 @@ Generating the project
 
 `Install cookiecutter <https://cookiecutter.readthedocs.io/en/latest/installation.html#install-cookiecutter>`_ and run::
 
-    cookiecutter gh:evozon/docker-django
+    cookiecutter gh:evozon/django-docker
 
 You will be asked for these fields:
 
@@ -72,11 +72,11 @@ If you made some wrong choices during generation you can regenerate it. There ar
 
 * Force Cookiecutter_ to override the files::
 
-    cookiecutter --overwrite-if-exists --config-file=directory-of-project/.cookiecutterrc gh:evozon/docker-django
+    cookiecutter --overwrite-if-exists --config-file=directory-of-project/.cookiecutterrc gh:evozon/django-docker
 
 * After installing `cookiepatcher <https://pypi.org/project/cookiepatcher/>`_ run::
 
-    cookiepatcher gh:evozon/docker-django directory-of-project
+    cookiepatcher gh:evozon/django-docker directory-of-project
 
 Using the project
 -----------------
