@@ -3,7 +3,9 @@ version: "{{ cookiecutter.docker_compose_version }}"
 x-develop:
   &develop
     volumes:
-    - "${PWD}:/app"
+    - $PWD:/app
+    - $PWD/.home:/root
+    - $PWD/.home:/home/app
     privileged: true
     tty: true
     environment:
