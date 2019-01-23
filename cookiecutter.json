@@ -5,7 +5,7 @@
     "compose_project_name": "{{ cookiecutter.name.lower().replace(' ','').replace('-','').replace('-','').replace('a', '').replace('e', '').replace('u', '').replace('i', '').replace('o', '').replace('a', '')[:4] }}",
     "django_app_name": "{{ cookiecutter.name.lower().replace(' ','_').replace('-','_') }}",
     "short_description": "An example project. Generated with evozon/docker-django.",
-    "pip_version": "18.1",
+    "pip_version": "19.0.1",
     "docker_compose_version": "3.7",
     "postgresql_version": "11",
     "redis_version": "5.0",
