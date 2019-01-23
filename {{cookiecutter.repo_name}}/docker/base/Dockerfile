@@ -18,7 +18,8 @@ RUN apt-get update \
                     'libpq-dev={{ cookiecutter.postgresql_version }}.*' 'libpq5={{ cookiecutter.postgresql_version }}.*' \
  && rm -rf /var/lib/apt/lists/*
 
-RUN bash -o pipefail -c "curl -fsSL 'https://bootstrap.pypa.io/get-pip.py' | python3 - --no-cache-dir --upgrade pip=={{ cookiecutter.pip_version }}"
+RUN bash -o pipefail -c "curl -fsSL 'https://bootstrap.pypa.io/get-pip.py' | \
+    python3 - --disable-pip-version-check --no-cache-dir --upgrade pip=={{ cookiecutter.pip_version }}"
 
 COPY requirements.txt /
 RUN mkdir /wheels \
@@ -52,7 +53,9 @@ ENV LC_ALL en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 
 ENV TERM=xterm
-RUN bash -o pipefail -c "curl -fsSL 'https://bootstrap.pypa.io/get-pip.py' | python3 - --no-cache-dir --upgrade pip=={{ cookiecutter.pip_version }}"
+
+RUN bash -o pipefail -c "curl -fsSL 'https://bootstrap.pypa.io/get-pip.py' | \
+    python3 - --disable-pip-version-check --no-cache-dir --upgrade pip=={{ cookiecutter.pip_version }}"
 
 RUN mkdir /deps
 COPY --from=deps /wheels/* /deps/
