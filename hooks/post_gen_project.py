@@ -28,10 +28,16 @@ if __name__ == "__main__":
 
 ################################################################################
 
-    To get started run these:
+    To get started.  Make a copy of the appropriate platform .env file.
 
         cd {{ cookiecutter.repo_name }}
-        docker-compose build base --pull
+        cp .env-linux-osx .env
+          or
+        cp .env-windows .env
+
+    Then run these
+
+        docker-compose build --pull base
         docker-compose build
         docker-compose up
 """)
